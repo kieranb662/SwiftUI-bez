@@ -308,4 +308,8 @@ public class PolyBezier: ObservableObject {
         elements = new
         cleanUp()
     }
+    
+    public func convertToShape() -> String {
+        convertPath(path: self.string)
+    }
 }

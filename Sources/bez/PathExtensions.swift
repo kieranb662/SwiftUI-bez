@@ -11,7 +11,7 @@ import SwiftUI
 // MARK: Path Extensions
 
 @available(iOS 13.0, macOS 10.15, watchOS 6.0 , tvOS 13.0, *)
-extension Path {
+public extension Path {
     /// The array of `Path.Elements` describing the path
     public var elements: [Path.Element] {
         var temp = [Path.Element]()
