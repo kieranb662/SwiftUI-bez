@@ -13,7 +13,7 @@ import SwiftUI
 @available(iOS 13.0, macOS 10.15, watchOS 6.0 , tvOS 13.0, *)
 public extension Path {
     /// The array of `Path.Elements` describing the path
-    public var elements: [Path.Element] {
+    var elements: [Path.Element] {
         var temp = [Path.Element]()
         forEach { (element) in
             temp.append(element)
@@ -22,7 +22,7 @@ public extension Path {
     }
     
     /// Returns the starting point of the path
-    public func getStartPoint() -> CGPoint? {
+    func getStartPoint() -> CGPoint? {
         if isEmpty {
             return nil
         }
@@ -47,7 +47,7 @@ public extension Path {
     }
     
     /// Returns the last point on the path rom the last curve command
-    public func getEndPoint() -> CGPoint? {
+    func getEndPoint() -> CGPoint? {
         if isEmpty {
             return nil
         }
