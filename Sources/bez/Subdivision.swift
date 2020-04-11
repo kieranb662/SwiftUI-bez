@@ -8,8 +8,6 @@
 import CoreGraphics
 
 
-// MARK: Bezier Subdivision
-
 
 /// # Line Subdivision
 /// Divides a line into `n` equal segments
@@ -22,8 +20,6 @@ public func subdivideLine(start: CGPoint, end: CGPoint, numberOfSegments n: Int)
     }
     return segments
 }
-
-
 
 
 /// # Quadratic Bezier Subdivision
@@ -46,8 +42,6 @@ public func subdivideQuadraticBezier(start: CGPoint, end: CGPoint, control: CGPo
     }
     return segments
 }
-
-
 
 
 /// # Cubic Bézier Subdivision

@@ -26,7 +26,6 @@ public func makeLineSegment(start: CGPoint, end: CGPoint, from: CGFloat, to: CGF
 }
 
 
-
 /// # Make Segment From Quadratic Bézier
 ///
 /// Creates a new quadratic bézier curve from a section of the given curve. Uses the matrix representation of

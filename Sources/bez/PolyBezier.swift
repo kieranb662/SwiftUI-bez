@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-// MARK: - PolyBézier Data Model
+// MARK: - PolyBézier Element
 
 /// # Bézier Curve Element (Polybézier Format)
 ///
@@ -125,6 +125,7 @@ public struct PolyBezierElement: Identifiable {
     
 }
 
+// MARK: - PolyBézier
 
 /// # PolyBézier Curve
 ///

@@ -9,6 +9,7 @@ import SwiftUI
 import CGExtender
 import simd
 
+/// Takes in a `Path.description` string, normalizes it and then converts the normalized path into a SwiftUI `Shape` file. 
 @available(iOS 13.0, macOS 10.15, watchOS 6.0 , tvOS 13.0, *)
 public func convertPath(path: String) -> String {
     var lookupTable = [CGPoint]()
@@ -21,25 +22,19 @@ public func convertPath(path: String) -> String {
     
     for element in elements {
         switch element {
-            
         case .move(let to):
             lookupTable.append(to)
             startingPoint = to
             lastPoint = to
-            
         case .line(let to):
-            
             numOfDivisions.forEach { (i) in
-                
                 let nextPossible = linearInterpolation(t: Float(i)/Float(numOfDivisions.upperBound), start: lastPoint, end: to)
                 if sqrt((nextPossible - lookupTable.last!).magnitudeSquared) > threshold {
                     lookupTable.append(nextPossible)
                 }
             }
             lastPoint = to
-            
         case .quadCurve(let to, let control):
-            
             numOfDivisions.forEach { (i) in
                 let nextPossible = quadraticBezierInterpolation(t: Float(i)/Float(numOfDivisions.upperBound), start: lastPoint, control: control, end: to)
                 if sqrt((nextPossible - lookupTable.last!).magnitudeSquared) > threshold {
@@ -47,7 +42,6 @@ public func convertPath(path: String) -> String {
                 }
             }
             lastPoint = to
-            
         case .curve(let to, let control1, let control2):
             
             numOfDivisions.forEach { (i) in
@@ -57,9 +51,7 @@ public func convertPath(path: String) -> String {
                 }
             }
             lastPoint = to
-            
         case .closeSubpath:
-            
             numOfDivisions.forEach { (i) in
                 let nextPossible = linearInterpolation(t: Float(i)/Float(numOfDivisions.upperBound), start: lastPoint, end: startingPoint)
                 if sqrt((nextPossible - lookupTable.last!).magnitudeSquared) > threshold {
@@ -73,8 +65,6 @@ public func convertPath(path: String) -> String {
     let maxX: CGFloat = lookupTable.map({$0.x}).max() ?? 0
     let minY: CGFloat = lookupTable.map({$0.y}).min() ?? 0
     let maxY: CGFloat = lookupTable.map({$0.y}).max() ?? 0
-    
-    
     
     var shapeString: String = """
 
@@ -93,10 +83,8 @@ public func convertPath(path: String) -> String {
                     }
 """
     
-
     for element in elements {
         switch element {
-        
         case .move(let to):
             let newX = (to.x - minX)/(maxX-minX)
             let newY = (to.y - minY)/(maxY-minY)
@@ -123,7 +111,5 @@ public func convertPath(path: String) -> String {
             shapeString.append(contentsOf: "\t\t\t\t\t\t\t\tpath.closeSubpath()")
         }
     }
-    
     return shapeString + endString
-    
 }

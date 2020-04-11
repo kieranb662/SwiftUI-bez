@@ -5,14 +5,90 @@
 //  Created by Kieran Brown on 3/21/20.
 //
 
-import CoreGraphics
+import SwiftUI
 import Accelerate
 import simd 
 
 
-// MARK: Arc Length
+// MARK: - Fast Arc Length
 
+@available(iOS 13.0, macOS 10.15, watchOS 6.0 , tvOS 13.0, *)
+/// Returns that length of the Bézier elemnt
+public func segmentLength(lastPoint: CGPoint, element: Path.Element) -> Double {
+    switch element {
+        
+    case .move(_):
+        return 0
+    case .line(let to):
+        return sqrt((to - lastPoint).magnitudeSquared)
+    case .quadCurve(let to, let control):
+        var tempTotal: Double = 0
+        var tempLast: CGPoint = lastPoint
+        for i in 1...20 {
+            let new = quadraticBezierInterpolation(t: Float(i)/Float(20), start: lastPoint, control: control, end: to)
+            tempTotal += sqrt((new-tempLast).magnitudeSquared)
+            tempLast = new
+        }
+        return tempTotal
+    case .curve(let to, let control1, let control2):
+        var tempTotal: Double = 0
+        var tempLast: CGPoint = lastPoint
+        for i in 1...20 {
+            let new = cubicBezierInterpolation(t: Float(i)/Float(20), start: lastPoint, control1: control1, control2: control2, end: to)
+            tempTotal += sqrt((new-tempLast).magnitudeSquared)
+            tempLast = new
+        }
+        return tempTotal
+    case .closeSubpath:
+        return 0
+    }
+}
+@available(iOS 13.0, macOS 10.15, watchOS 6.0 , tvOS 13.0, *)
+/// Calculates the length of a `Path` using linear interpolation for speed. 
+public func quickLengths(path: Path) -> [Double] {
+    let elements = path.elements
+    var lastPoint: CGPoint = .zero
+    var startingPoint: CGPoint = .zero
+    var segmentLengths: [Double] = []
+    for element in elements {
+        switch element {
+            
+        case .move(let to):
+            startingPoint = to
+            lastPoint = to
+        case .line(let to):
+            segmentLengths.append(sqrt((to - lastPoint).magnitudeSquared))
+            lastPoint = to
+        case .quadCurve(let to, let control):
+            var tempTotal: Double = 0
+            var tempLast: CGPoint = lastPoint
+            for i in 1...20 {
+                let new = quadraticBezierInterpolation(t: Float(i)/Float(20), start: lastPoint, control: control, end: to)
+                tempTotal += sqrt((new-tempLast).magnitudeSquared)
+                tempLast = new
+            }
+            segmentLengths.append(tempTotal)
+            lastPoint = to
+            
+        case .curve(let to, let control1, let control2):
+            var tempTotal: Double = 0
+            var tempLast: CGPoint = lastPoint
+            for i in 1...20 {
+                let new = cubicBezierInterpolation(t: Float(i)/Float(20), start: lastPoint, control1: control1, control2: control2, end: to)
+                tempTotal += sqrt((new-tempLast).magnitudeSquared)
+                tempLast = new
+            }
+            segmentLengths.append(tempTotal)
+            lastPoint = to
+        case .closeSubpath:
+            segmentLengths.append(sqrt((lastPoint - startingPoint).magnitudeSquared))
+            lastPoint = startingPoint
+        }
+    }
+    return segmentLengths
+}
 
+// MARK: - Accurate Arc Length
 
 /// # Calculate Arc Length Of Quadratic Bézier Curve
 ///

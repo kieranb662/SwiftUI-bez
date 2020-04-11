@@ -8,8 +8,6 @@
 import CoreGraphics
 import simd
 
-// MARK: Bézier Derivatives
-
 
 /// # Derivative of Quadratic Bézier at t
 /// Calculates the value of the derivative of the curve at the value `t`

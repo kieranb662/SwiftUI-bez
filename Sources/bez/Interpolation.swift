@@ -9,8 +9,6 @@ import CoreGraphics
 import simd 
 
 
-// MARK: Bézier Interpolation Functions
-
 
 /// # Linear Interpolation
 ///
@@ -26,8 +24,6 @@ public func linearInterpolation(t: Float, start: CGPoint, end: CGPoint) -> CGPoi
     let point = mix(p0, p1, t: t)
     return CGPoint(x: CGFloat(point.x), y: CGFloat(point.y))
 }
-
-
 
 
 
