@@ -7,8 +7,6 @@
 
 import CoreGraphics
 
-
-
 /// # Line Subdivision
 /// Divides a line into `n` equal segments
 @available(iOS 13.0, macOS 10.15, watchOS 6.0 , tvOS 13.0, *)

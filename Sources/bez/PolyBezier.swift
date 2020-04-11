@@ -51,7 +51,7 @@ public struct PolyBezierElement: Identifiable {
         }
         return .cubic
     }
-
+    
     public enum CommandType {
         case line, quad, cubic, moveTo, closeSubpath
     }
@@ -145,10 +145,10 @@ public class PolyBezier: ObservableObject {
                 switch element.type {
                 case .line: path.addLine(to: element.currentPositions[0])
                 case .quad: path.addQuadCurve(to: element.currentPositions[0],
-                                      control: element.currentPositions[1])
+                                              control: element.currentPositions[1])
                 case .cubic: path.addCurve(to: element.currentPositions[0],
-                                  control1: element.currentPositions[1],
-                                  control2: element.currentPositions[2])
+                                           control1: element.currentPositions[1],
+                                           control2: element.currentPositions[2])
                 case .moveTo: path.move(to: element.currentPositions[0])
                 case .closeSubpath: path.closeSubpath()
                 }
@@ -156,7 +156,7 @@ public class PolyBezier: ObservableObject {
         }
     }
     /// String representation of the current path
-   public var string: String { path.description }
+    public var string: String { path.description }
     
     public init(elements: [PolyBezierElement]) { self.elements = elements }
     
@@ -282,10 +282,10 @@ public class PolyBezier: ObservableObject {
             if element!.element.type != .moveTo { elements.insert(.closedSubPath(), at: element!.offset+1) }
         } else {
             let selected = elements.enumerated()
-                                .filter({ id.contains($0.element.id) })
-                                .filter({$0.element.type != .moveTo})
-                                .reversed()
-                                .map({$0.offset})
+                .filter({ id.contains($0.element.id) })
+                .filter({$0.element.type != .moveTo})
+                .reversed()
+                .map({$0.offset})
             selected.forEach({ self.elements.insert(.closedSubPath(), at: $0+1)})
         }
         cleanUp()

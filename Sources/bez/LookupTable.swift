@@ -12,6 +12,10 @@ import simd
 
 /// Iterates through all path elements and samples interpolated points on that segment (1 + numberOfDivisions) times
 /// using the parametric representation of the specific Bézier curve.
+/// - parameters:
+///  - path: The path to be sampled
+///  - capacity: The maximum number of sampled points (**Default**: 500)
+///
 @available(iOS 13.0, macOS 10.15, watchOS 6.0 , tvOS 13.0, *)
 public func generateLookupTable(path: Path, capacity: Int = 500) -> [CGPoint] {
     let elements = path.elements
