@@ -1,5 +1,5 @@
 <p align="center">
-    <img src ="bezLogo.svg" width=500 />
+    <img src ="Media/bezLogo.svg" width=500 />
 </p>
 
 <p align="center">
@@ -21,7 +21,7 @@ The various utilities included are:
 
 ## Mathematical Background 
 
-![bez Info](bezMath.svg)
+![bez Info](Media/bezMath.svg)
 
 
 ## Example Uses 
