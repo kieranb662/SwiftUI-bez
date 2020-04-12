@@ -19,4 +19,11 @@ The various utilities included are:
 * **Path Description -> Normalized SwiftUI Shape Conversion**
 
 
+## Mathematical Background 
+
 ![bez Info](bezMath.svg)
+
+
+## Example Uses 
+
+<img src="https://github.com/kieranb662/SlidersExamples/blob/master/Sliders%20Media/PSliderExample.gif" alt="Path Slider Gif">
