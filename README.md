@@ -12,4 +12,4 @@ The various utilities included are:
 * **Path Description -> Normalized SwiftUI Shape Conversion**
 
 
-[bez Info](BezInfo.pdf)
+![bez Info](bezMath.svg)
