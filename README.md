@@ -7,7 +7,13 @@
     <img src="https://img.shields.io/badge/Swift-5.1-orange.svg" alt="Swift 5.1" />
 </p>
 
-Bez is a swift package aimed at making Bézier curves easy to work with and manipulate. 
+
+Bez is a swift package aimed at making Bézier curves easy to work with and manipulate. Try out the `PathEditor` for a quick way to get started! 
+<p align="center">
+<img src="Media/PathEditor.gif" alt="Path Slider Gif" height=500>
+   </p>
+
+
 
 The various utilities included are: 
 * **Interpolation Functions**
