@@ -26,4 +26,7 @@ The various utilities included are:
 
 ## Example Uses 
 
-<img src="https://github.com/kieranb662/SlidersExamples/blob/master/Sliders%20Media/PSliderExample.gif" alt="Path Slider Gif">
+The `PSlider` component of the [Sliders](https://github.com/kieranb662/Sliders) SwiftUI Library 
+<p align="center">
+<img src="https://github.com/kieranb662/SlidersExamples/blob/master/Sliders%20Media/PSliderExample.gif" alt="Path Slider Gif" height=500>
+   </p>
