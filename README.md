@@ -24,6 +24,36 @@ The various utilities included are:
 * **Lookup Table Generation**
 * **Path Description -> Normalized SwiftUI Shape Conversion**
 
+## Quick Start 
+
+1. Snag that URL from the github repo 
+2. In Xcode -> File -> Swift Packages -> Add Package Dependencies 
+3. Paste the URL Into the box
+4. Specify the minimum version number (1.0.5)
+5. Copy/Paste the following snippet Into The ContentView.swift file
+
+````Swift 
+import SwiftUI
+import bez
+
+struct ContentView: View {
+    @ObservedObject var polybezier: PolyBezier = PolyBezier(Circle().path(in: .init(x: 50, y: 100, width: 100, height: 100)))
+    var body: some View {
+        NavigationView {
+            PathEditor(polybezier: _polybezier, name: "Shape",
+                save:  { (name , path) in print(path)})
+                .navigationBarTitle("Bez Editor", displayMode: .inline)
+            
+        }
+    }
+}
+
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        ContentView().colorScheme(.dark)
+    }
+}
+````
 
 ## Mathematical Background 
 
