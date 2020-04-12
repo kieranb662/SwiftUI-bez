@@ -73,6 +73,10 @@ public struct PolyBezierElement: Identifiable {
         }
     }
     
+    public mutating func update(_ offset: CGSize) {
+        positions = positions.map({$0 + offset.toPoint()})
+    }
+    
     // MARK: PolyBezierElement Init
     
     public init(positions: [CGPoint], offsets: [CGSize], isMoveTo: Bool) {
@@ -134,10 +138,12 @@ public struct PolyBezierElement: Identifiable {
 ///
 /// Only holds the minimal amount of data, an array of elements
 ///
-@available(iOS 13.0, macOS 10.15, watchOS 6.0 , tvOS 13.0, *)
+@available(iOS 13.0, macOS 10.15, watchOS 6.0, *)
 public class PolyBezier: ObservableObject {
     
     @Published public var elements: [PolyBezierElement]
+    @Published public var selected: Set<UUID> = []
+    
     
     public var path: Path {
         Path { (path) in
@@ -162,6 +168,7 @@ public class PolyBezier: ObservableObject {
     
     public init(_ path: Path) {
         elements = []
+    
         path.forEach({ (element) in
             switch element {
             case .move(let to): self.elements.append(.moveTo(to: to))
@@ -171,6 +178,7 @@ public class PolyBezier: ObservableObject {
             case .closeSubpath: self.elements.append(.closedSubPath())
             }
         })
+        
     }
     
     // MARK: Path Manipulation Functions
@@ -200,6 +208,17 @@ public class PolyBezier: ObservableObject {
             }
         }
         elements = temp
+    }
+    
+    
+    public func multiDrag(_ offset: CGSize) {
+        if self.selected.count > 1 {
+            for i in elements.indices {
+                if self.selected.contains(self.elements[i].id) {
+                    self.elements[i].update(offset)
+                }
+            }
+        }
     }
     
     // FIXME: Fix The Edge Cases for Deletions
