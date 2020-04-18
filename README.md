@@ -8,10 +8,16 @@
 </p>
 
 
-Bez is a swift package aimed at making Bézier curves easy to work with and manipulate. Try out the `PathEditor` for a quick way to get started! 
+Bez is a swift package aimed at making Bézier curves easy to work with and manipulate. 
+
+Try out all that bez has to offer by creating your own shapes using the [bez editor](https://apps.apple.com/us/app/bez-editor/id1508764103) app available for free on iOS 13.4 and greater. 
+
 <p align="center">
-<img src="Media/PathEditor.gif" alt="Path Slider Gif" height=500>
-   </p>
+  <a href="https://apps.apple.com/us/app/bez-editor/id1508764103">
+  <img width="300px" src="https://github.com/kieranb662/kieranb662.github.io/blob/master/assets/bezeditorPreview.gif">
+  </a>
+  </p>
+
 
 
 
